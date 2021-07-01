@@ -41,8 +41,13 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _editingController;
   int _counter = 0;
 
-  void _incrementCounter() {
+  @override
+  void initState() {
+    super.initState();
     _editingController = TextEditingController(text: "Bin");
+  }
+
+  void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
