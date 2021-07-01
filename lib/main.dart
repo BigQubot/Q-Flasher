@@ -38,9 +38,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController _editingController;
   int _counter = 0;
 
   void _incrementCounter() {
+    _editingController = TextEditingController(text: "Bin");
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -238,13 +240,42 @@ class _MyHomePageState extends State<MyHomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TextField(),
+                      Text('Bin:'),
+                      VerticalDivider(),
+                      Expanded(
+                        child: TextField(
+                          controller: _editingController,
+                        ),
+                      ),
+                      VerticalDivider(),
                       OutlinedButton(
                         onPressed: () {
+                          final file = OpenFilePicker()
+                            ..filterSpecification = {
+                              'Bin (*.bin)': '*.bin',
+                              'svg (*.svg)': '*.svg',
+                              'Word Document (*.doc)': '*.doc',
+                              'Web Page (*.htm; *.html)': '*.htm;*.html',
+                              'Text Document (*.txt)': '*.txt',
+                              'All Files': '*.*'
+                            }
+                            ..defaultFilterIndex = 0
+                            ..defaultExtension = 'doc'
+                            ..title = 'Select a document';
+
+                          final result = file.getFile();
+                          if (result != null) {
+                            _editingController.text = result.path;
+                            print(result.path);
+                          }
                           // Respond to button press
                         },
-                        child: Text("Start"),
-                      )
+                        child: Text("..."),
+                      ),
+                      VerticalDivider(),
+                      Text('@'),
+                      VerticalDivider(),
+                      Container(width: 80.0, child: TextField())
                     ],
                   ),
                 ],
