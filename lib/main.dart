@@ -233,41 +233,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Card(
               clipBehavior: Clip.antiAlias,
-              child: Column(),
-            ),
-            Card(
-              clipBehavior: Clip.antiAlias,
               child: Column(
                 children: [
-                  ListTile(
-                    title: const Text('串口设置'),
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text('端口'),
-                      DropdownButton(
-                        value: Port,
-                        items: <DropdownMenuItem>[
-                          DropdownMenuItem(
-                            value: 'COM1',
-                            child: const Text('COM1'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'COM2',
-                            child: const Text('COM2'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'COM3',
-                            child: const Text('COM3'),
-                          ),
-                        ],
-                        onChanged: (value) {
-                          setState(() {
-                            Port = value;
-                          });
+                      TextField(),
+                      OutlinedButton(
+                        onPressed: () {
+                          // Respond to button press
                         },
-                      ),
+                        child: Text("Start"),
+                      )
                     ],
                   ),
                 ],
